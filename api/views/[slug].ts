@@ -35,6 +35,7 @@ export default async function handler(req: any, res: any) {
     }
     res.status(200).json({ views: newCount });
   } catch (error: any) {
+    console.error(error);
     res.status(500).json({ error: error.message || error.toString() });
   }
 }
