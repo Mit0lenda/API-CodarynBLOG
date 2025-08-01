@@ -28,10 +28,10 @@ export default async function handler(req: any, res: any) {
         .eq('slug', slug);
       if (updateError) throw updateError;
     } else {
-      const { error: insertError } = await supabase
+      const { error: upsertError } = await supabase
         .from('post_views')
-        .insert({ slug, count: newCount });
-      if (insertError) throw insertError;
+        .upsert({ slug, count: newCount });
+      if (upsertError) throw upsertError;
     }
     res.status(200).json({ views: newCount });
   } catch (error: any) {
